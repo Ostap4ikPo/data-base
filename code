@@ -1,0 +1,21 @@
+pragma solidity ^0.8.0;
+
+contract PhoneBook {
+    mapping(string => string) private phoneNumbers; // Maps name to phone number
+    mapping(string => string) private namesByNumber; // Maps phone number to name
+
+    function addEntry(string memory name, string memory phoneNumber) public {
+        require(bytes(name).length > 0, "Name must not be empty");
+        require(bytes(phoneNumber).length > 0, "Phone number must not be empty");
+        phoneNumbers[name] = phoneNumber;
+        namesByNumber[phoneNumber] = name;
+    }
+
+    function getPhoneNumber(string memory name) public view returns (string memory) {
+        return phoneNumbers[name];
+    }
+
+    function getName(string memory phoneNumber) public view returns (string memory) {
+        return namesByNumber[phoneNumber];
+    }
+}
